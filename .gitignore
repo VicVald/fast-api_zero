@@ -1,0 +1,7 @@
+database.db
+.env
+.coverage
+.ruff_cache
+.pytest_cache
+.venv
+htmlcov
