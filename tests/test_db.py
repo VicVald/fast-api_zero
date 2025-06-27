@@ -10,7 +10,7 @@ def test_create_user(session, mock_db_time):
         new_user = User(
             username='novo cabeça',
             email='novoemail@terra.com',
-            password="gordinhobunitu"
+            password='gordinhobunitu',
         )
         session.add(new_user)
         session.commit()

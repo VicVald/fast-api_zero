@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from jwt import decode
 
-from project.security import SECRET_KEY, create_access_token
+from project.security import create_access_token, settings
 
 
 def test_jwt():
@@ -10,17 +10,20 @@ def test_jwt():
 
     token = create_access_token(data=data)
 
-    decoded = decode(token, SECRET_KEY, algorithms=['HS256'])
+    decoded = decode(
+        token,
+        settings.SECRET_KEY,
+        algorithms=[settings.ALGORITHM]
+    )
 
     assert decoded['test'] == data['test']
     assert 'exp' in decoded
 
 
 def test_jwt_invalid_token(client, user):
-
     response = client.delete(
         f'/users/{user.id}',
-        headers={'Authorization': 'Bearer VSFD VERIFICACAO'}
+        headers={'Authorization': 'Bearer VSFD VERIFICACAO'},
     )
 
     assert response.status_code == HTTPStatus.UNAUTHORIZED
