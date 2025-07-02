@@ -12,7 +12,7 @@ app.include_router(users.router)
 
 
 @app.get('/hello/', response_class=HTMLResponse)
-def show_html():
+async def show_html():
     return """
     <html>
       <head>
@@ -25,5 +25,5 @@ def show_html():
 
 
 @app.get('/', status_code=HTTPStatus.OK, response_model=Message)
-def read_root():
+async def read_root():
     return {'message': 'Olá Mundo!'}
